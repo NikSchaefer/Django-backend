@@ -17,12 +17,14 @@ function Render(props: { arr: number[] }): any {
 function App() {
 
 
-  const [con, setContent] = useState<any>([])
+  const [con, setContent] = useState<string>('9')
+
 
   window.onload = function () {
     for (let j = 0; j < 50; j++) {
       content.push(j)
-      setContent([...con, 8])
+      setContent(`fsdf`)
+
     }
   }
 
