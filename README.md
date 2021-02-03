@@ -1,13 +1,42 @@
-# Typescript-React-Template
-Baseline Empty Typescript Configuration for React
+# Django-React-Typescript-Template
 
+Django Backend React Typescript frontend template configured for Heroku easy deployment
 
-Git Clone to setup
+Django static files is configured with whitenoise to serve its own static files
 
-```git clone https://github.com/NikSchaefer/Typescript-React-Template/```
+React is configured with webpack and tsconfig. 
 
-```npm install``` to install dependencies
+Backend Utilizes Django rest framework and the /api points to backend urls.
 
-```npm start``` to run in development
+# Setup
 
-```npm run build``` to create optimized build
+[create virtual env](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+
+then
+setup .env
+rename .env.example to just .env
+
+set secret key in .env by generating a key with
+[This site](https://miniwebtool.com/django-secret-key-generator/)
+
+install depenecies for pip
+in base dir
+`pipenv install -r requirements.txt`
+
+# To Run Locally
+
+in base dir in terminal run
+`py manage.py runserver` or `python manage.py runserver`
+
+# Deployment
+
+Configured for Heroku
+Make sure to set Enviroment Variables in Heroku and .env
+
+# License
+
+MIT License
+
+# about
+
+contact nikkschaefer@gmail.com for any questions or leave an issue on the repo
