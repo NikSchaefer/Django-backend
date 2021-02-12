@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from ..utils.exists import username_exists 
 # pylint: disable=no-member
 from ..utils.validate import validate
+import re
+EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 @api_view(['POST'])
 def create_user_view(request):
     try:
@@ -17,6 +19,12 @@ def create_user_view(request):
             "status": "No",
             "detail": "Incorrect Fields Provided",
         })
+    if not EMAIL_REGEX.match(username):
+        return Response({
+            "status": "No",
+            "detail": "Invalid Email"
+        })
+
     if username_exists(username):
         return Response({
             "status": "No",
