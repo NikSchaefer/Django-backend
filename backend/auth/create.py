@@ -6,22 +6,39 @@ from rest_framework.response import Response
 
 from ..utils.exists import username_exists 
 # pylint: disable=no-member
-
+from ..utils.validate import validate
 @api_view(['POST'])
 def create_user_view(request):
-    username = str(request.data["username"])
-    password = str(request.data["password"])
-
+    try:
+        username = request.data["username"]
+        password = request.data["password"]
+    except:
+        return Response({
+            "status": "No",
+            "detail": "Incorrect Fields Provided",
+        })
     if username_exists(username):
-        return Response("User Exists")
+        return Response({
+            "status": "No",
+            "detail": "This Email Already has an Account"
+        })
     if len(list(username)) < 6:
-        return Response("Requires Longer Username")
-    if len(list(password)) < 6:
-        return Response("Requires Longer Password")
-
+        return Response({
+            "status": "No",
+            "detail": "Use a longer username"
+        })
+    validation = validate(password)
+    if validation != "Good":
+        return Response({
+            "status": "No",
+            "detail": validation
+        })
     user = User.objects.create_user(
         username=username, email="test@gmail.com", password=password)
 
     login(request, user)
-    return Response("User Created")
+    return Response({
+        "status": "Ok",
+        "sessionid": request.session.session_key,
+    })
 
