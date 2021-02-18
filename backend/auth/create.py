@@ -22,7 +22,7 @@ def create_user_view(request):
     if not EMAIL_REGEX.match(username):
         return Response({
             "status": "No",
-            "detail": "Invalid Email"
+            "detail": "Invalid Email Configuration"
         })
 
     if username_exists(username):
