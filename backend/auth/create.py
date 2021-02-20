@@ -42,7 +42,7 @@ def create_user_view(request):
             "detail": validation
         })
     user = User.objects.create_user(
-        username=username, email="test@gmail.com", password=password)
+        username=username, email=username, password=password)
 
     login(request, user)
     return Response({
